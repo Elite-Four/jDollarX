@@ -71,7 +71,13 @@ void function (root, factory) {
           }
         }
       } else if (key === 'style') {
-        $el.css(value)
+        var style = {}
+        for (var k in value) {
+          style[k.replace(/[A-Z]/g, function (val) {
+            return '-'+val.toLowerCase()
+          })] = value[k]
+        }
+        $el.css(style)
       } else {
         $el.attr(key, value)
       }
