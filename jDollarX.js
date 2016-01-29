@@ -65,7 +65,13 @@ void function (root, factory) {
       if (key !== 'children') {
         switch (key) {
           case 'style':
-            $el.css(value)
+            var style = {}
+            for (var k in value) {
+              style[k.replace(/[A-Z]/g, function (val) {
+                return '-'+val.toLowerCase()
+              })] = value[k]
+            }
+            $el.css(style)
             break
           default:
             $el.attr(key, value)

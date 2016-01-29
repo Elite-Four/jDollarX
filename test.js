@@ -65,6 +65,18 @@ describe('Build with content', function () {
     $el.css('color').should.be.equal('#fff')
   })
 
+  it('should works with style & camelcase', function () {
+    var inlineStyle = {
+      backgroundImage: 'url(/foo.png)',
+      WebkitTransition: 'all',
+      msTransition: 'all'
+    };
+    var $el = <div style={inlineStyle}></div>
+    $el.css('-webkit-transition').should.be.equal('all')
+    $el.css('ms-transition').should.be.equal('all')
+    $el.css('background-image').should.be.equal('url(/foo.png)')
+  })
+
   it('should works with attributes & expression', function () {
     var $true = <div data-foo={true ? 'true' : 'false'}></div>
     var $false = <div data-foo={false ? 'true' : 'false'}></div>
