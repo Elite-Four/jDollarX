@@ -2,9 +2,22 @@ void function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(['jquery'], factory)
   } else if (typeof module === 'object' && module.exports) {
-    module.exports = factory(require('jquery'))
+    var $
+    try {
+      $ = require('jquery')
+    } catch(e) {
+      throw new Error('Cannot find module "jquery".')
+    }
+    try {
+      $ = require('npm-zepto')
+    } catch(e) {
+      throw new Error('Cannot find module "npm-zepto".')
+    }
+    
+    module.exports = factory($)
   } else {
-    root.J$X = factory(root.jQuery)
+    var $ = root.jQuery || root.zepto
+    root.J$X = factory($)
   }
 } (this, function ($) {
   var KEY_ALIASES = {
