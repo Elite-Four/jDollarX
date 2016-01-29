@@ -9,14 +9,16 @@ Use JSX to build jQuery Objects.
 Install
 -------
 
-    npm install jdollarx
+```bash
+$ npm install jdollarx
+```
 
 Usage
 -----
 
 ```jsx
-    var J$X = require('jdollarx')
-    $('body').append(<div>Hello, world</div>)
+var J$X = require('jdollarx')
+$('body').append(<div>Hello, world</div>)
 ```
 
 License
