@@ -62,15 +62,7 @@ void function (root, factory) {
     for (var key in props) {
       var value = props[key]
       key = KEY_ALIASES[key] || key
-      if (key !== 'children') {
-        switch (key) {
-          case 'style':
-            $el.css(value)
-            break
-          default:
-            $el.attr(key, value)
-        }
-      } else { // children
+      if (key === 'children') {
         if (!isArray(value)) {
           append($el, value)
         } else {
@@ -78,6 +70,10 @@ void function (root, factory) {
             append($el, value[i])
           }
         }
+      } else if (key === 'style') {
+        $el.css(value)
+      } else {
+        $el.attr(key, value)
       }
     }
     return $el
