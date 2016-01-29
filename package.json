@@ -1,0 +1,28 @@
+{
+  "name": "jdollarx",
+  "version": "0.0.0",
+  "description": "Use JSX to build jQuery Objects.",
+  "main": "jDollarX.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elite-Four/jDollarX.git"
+  },
+  "keywords": [
+    "jsx",
+    "jquery"
+  ],
+  "author": "George Chung <Gerhut@GMail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Elite-Four/jDollarX/issues"
+  },
+  "homepage": "https://github.com/Elite-Four/jDollarX#readme",
+  "devDependencies": {
+    "jquery": "^2.2.0",
+    "mocha": "^2.4.5",
+    "should": "^8.2.1"
+  }
+}
