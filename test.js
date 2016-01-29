@@ -47,9 +47,28 @@ describe('Build with content', function () {
     var $el = <div>{void 0}</div>
     $el.text().should.be.empty
   })
-  
-  it('should works with property', function () {
+
+  it('should works with custom attributes', function () {
     var $el = <div data-foo='bar'></div>
     $el.attr('data-foo').should.be.equal('bar')
+  })
+
+  it('should works with class', function () {
+    var classList = 'foo bar'
+    var $el = <div className={classList}></div>
+    $el.hasClass('bar').should.be.equal(true)
+  })
+
+  it('should works with style', function () {
+    var inlineStyle = {color: '#fff'}
+    var $el = <div style={inlineStyle}></div>
+    $el.css('color').should.be.equal('#fff')
+  })
+
+  it('should works with attributes & expression', function () {
+    var $true = <div data-foo={true ? 'true' : 'false'}></div>
+    var $false = <div data-foo={false ? 'true' : 'false'}></div>
+    $true.attr('data-foo').should.be.equal('true')
+    $false.attr('data-foo').should.be.equal('false')
   })
 })
