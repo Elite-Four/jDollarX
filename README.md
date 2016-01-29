@@ -17,6 +17,7 @@ Usage
 -----
 
 ```jsx
+/** @jsx J$X */
 var J$X = require('jdollarx')
 $('body').append(<div>Hello, world</div>)
 ```
