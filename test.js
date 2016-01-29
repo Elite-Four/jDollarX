@@ -47,7 +47,9 @@ describe('Build with content', function () {
     var $el = <div>{void 0}</div>
     $el.text().should.be.empty
   })
+})
 
+describe('Build with attributes', function () {
   it('should works with custom attributes', function () {
     var $el = <div data-foo='bar'></div>
     $el.attr('data-foo').should.be.equal('bar')
