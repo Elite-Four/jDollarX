@@ -1,4 +1,5 @@
-void function (root, factory) {
+(function (root, factory) {
+  /* eslint-disable */
   if (typeof define === 'function' && define.amd) {
     define(['jquery'], factory)
   } else if (typeof module === 'object' && module.exports) {
@@ -6,7 +7,8 @@ void function (root, factory) {
   } else {
     root.J$X = factory(root.jQuery)
   }
-} (this, function ($) {
+  /* eslint-enable */
+})(this, function ($) {
   var KEY_ALIASES = {
     className: 'class',
     htmlFor: 'for'
@@ -15,18 +17,18 @@ void function (root, factory) {
   var slice = Array.prototype.slice
   var ownProp = Object.prototype.hasOwnProperty
 
-  function isArray(obj) {
+  function isArray (obj) {
     return Object.prototype.toString.call(obj) === '[object Array]'
   }
 
-  function ClearObject(obj) {
+  function ClearObject (obj) {
     for (var key in obj) if (ownProp.call(obj, key)) {
       this[key] = obj[key]
     }
   }
   ClearObject.prototype = null
 
-  function append($el, content) {
+  function append ($el, content) {
     if (content == null) {
       return
     } else if (typeof content === 'object') {
@@ -73,9 +75,10 @@ void function (root, factory) {
       } else if (key === 'style') {
         var style = {}
         for (var k in value) {
-          style[k.replace(/[A-Z]/g, function (val) {
-            return '-'+val.toLowerCase()
-          })] = value[k]
+          var styleKey = k.replace(/[A-Z]/g, function (val) {
+            return '-' + val.toLowerCase()
+          })
+          style[styleKey] = value[k]
         }
         $el.css(style)
       } else {
