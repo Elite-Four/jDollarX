@@ -4,6 +4,7 @@
   "description": "Use JSX to build jQuery Objects.",
   "main": "jDollarX.js",
   "scripts": {
+    "dev": "mocha --watch --compilers js:babel-register",
     "test": "mocha --compilers js:babel-register"
   },
   "repository": {

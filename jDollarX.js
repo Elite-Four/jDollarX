@@ -14,7 +14,8 @@ void function (root, factory) {
 
   var slice = Array.prototype.slice
   var ownProp = Object.prototype.hasOwnProperty
-  var isArray = function (obj) {
+
+  function isArray(obj) {
     return Object.prototype.toString.call(obj) === '[object Array]'
   }
 
@@ -24,6 +25,17 @@ void function (root, factory) {
     }
   }
   ClearObject.prototype = null
+
+  function append($el, content) {
+    if (content == null) {
+      return
+    } else if (typeof content === 'object') {
+      $el.append(content)
+    } else {
+      var $dummy = $('<div>').text(content.toString())
+      $el.append($dummy.html())
+    }
+  }
 
   var J$X = function (name, props/*, children... */) {
     var children = slice.call(arguments, 2)
@@ -53,11 +65,11 @@ void function (root, factory) {
       if (key !== 'children') {
         $el.attr(key, value)
       } else { // children
-        if (!isArray(children)) {
-          $el.append(children)
+        if (!isArray(value)) {
+          append($el, value)
         } else {
-          for (var i = 0, l = children.length; i < l; i++) {
-            $el.append(children[i])
+          for (var i = 0, l = value.length; i < l; i++) {
+            append($el, value[i])
           }
         }
       }
