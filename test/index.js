@@ -1,7 +1,9 @@
-var should = require('should')
+/* global describe, it */
+/** @jsx J$X */
+
 var cheerio = require('cheerio')
 var proxyquire = require('proxyquire')
-var J$X = proxyquire('./jDollarX', { 'jquery': cheerio })
+var J$X = proxyquire('../jDollarX', { 'jquery': cheerio })
 
 describe('Build with tag name', function () {
   it('should works', function () {
