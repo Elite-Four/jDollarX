@@ -1,7 +1,7 @@
 var should = require('should')
 var cheerio = require('cheerio')
 var proxyquire = require('proxyquire')
-var J$X = proxyquire('./jDollarX', { 'jquery': cheerio })
+var J$X = require('./jDollarX')
 
 describe('Build with tag name', function () {
   it('should works', function () {
