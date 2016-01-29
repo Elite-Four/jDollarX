@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    "syntax-jsx",
+    ["transform-react-jsx", {
+      "pragma": "J$X"
+    }]
+  ]
+}
