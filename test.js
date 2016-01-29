@@ -47,4 +47,9 @@ describe('Build with content', function () {
     var $el = <div>{void 0}</div>
     $el.text().should.be.empty
   })
+  
+  it('should works with property', function () {
+    var $el = <div data-foo='bar'></div>
+    $el.attr('data-foo').should.be.equal('bar')
+  })
 })
