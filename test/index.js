@@ -80,6 +80,12 @@ describe('Build with attributes', function () {
     $el.css('color').should.be.equal('#fff')
   })
 
+  it('should work with style of multiple words\' name', function () {
+    var inlineStyle = {textAlign: 'center'}
+    var $el = <div style={inlineStyle}></div>
+    $el.css('text-align').should.be.equal('center')
+  })
+
   it('should work with attributes & expression', function () {
     var $true = <div data-foo={true ? 'true' : 'false'}></div>
     var $false = <div data-foo={false ? 'true' : 'false'}></div>
