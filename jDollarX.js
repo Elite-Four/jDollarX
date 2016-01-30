@@ -1,24 +1,31 @@
 (function (root, factory) {
   /* eslint-disable */
   if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory)
+    define('J$X', factory)
   } else if (typeof module === 'object' && module.exports) {
-    module.exports = factory(require('jquery'))
+    module.exports = factory()
   } else {
-    root.J$X = factory(root.jQuery)
+    root.J$X = factory()
   }
   /* eslint-enable */
-})(this, function ($) {
+})(this, function () {
+  var $ = this.$ || function () {
+    throw new Error(
+      'Cannot find $ in global, run J$X.use( ... ) to assign.'
+    )
+  }
+
   var KEY_ALIASES = {
     className: 'class',
     htmlFor: 'for'
   }
 
-  var slice = Array.prototype.slice
   var ownProp = Object.prototype.hasOwnProperty
+  var toString = Object.prototype.toString
+  var slice = Array.prototype.slice
 
   function isArray (obj) {
-    return Object.prototype.toString.call(obj) === '[object Array]'
+    return toString.call(obj) === '[object Array]'
   }
 
   function ClearObject (obj) {
@@ -59,6 +66,10 @@
     )
   }
 
+  J$X.use = function (use$) {
+    $ = use$
+  }
+
   J$X.dom = function (name, props) {
     var $el = $('<' + name + '>')
     for (var key in props) {
@@ -73,14 +84,7 @@
           }
         }
       } else if (key === 'style') {
-        var style = {}
-        for (var k in value) {
-          var styleKey = k.replace(/[A-Z]/g, function (val) {
-            return '-' + val.toLowerCase()
-          })
-          style[styleKey] = value[k]
-        }
-        $el.css(style)
+        $el.css(value)
       } else {
         $el.attr(key, value)
       }
