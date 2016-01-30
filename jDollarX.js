@@ -1,24 +1,31 @@
 (function (root, factory) {
   /* eslint-disable */
   if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory)
+    define('J$X', factory)
   } else if (typeof module === 'object' && module.exports) {
-    module.exports = factory(require('jquery'))
+    module.exports = factory()
   } else {
-    root.J$X = factory(root.jQuery)
+    root.J$X = factory()
   }
   /* eslint-enable */
-})(this, function ($) {
+})(this, function () {
+  var $ = this.$ || function () {
+    throw new Error(
+      'Cannot find $ in global, run J$X.use( ... ) to assign.'
+    )
+  }
+
   var KEY_ALIASES = {
     className: 'class',
     htmlFor: 'for'
   }
 
-  var slice = Array.prototype.slice
   var ownProp = Object.prototype.hasOwnProperty
+  var toString = Object.prototype.toString
+  var slice = Array.prototype.slice
 
   function isArray (obj) {
-    return Object.prototype.toString.call(obj) === '[object Array]'
+    return toString.call(obj) === '[object Array]'
   }
 
   function ClearObject (obj) {
@@ -57,6 +64,10 @@
     throw new Error(
       'Invalid element name, either tag name or element constructor'
     )
+  }
+
+  J$X.use = function (use$) {
+    $ = use$
   }
 
   J$X.dom = function (name, props) {
