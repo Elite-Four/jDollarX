@@ -93,3 +93,24 @@ describe('Build with attributes', function () {
     $false.attr('data-foo').should.be.equal('false')
   })
 })
+
+describe('Build with nested components', function () {
+  it('should work', function () {
+    function Editor (props) {
+      /* eslint-disable react/prop-types */
+      return <form action={props.action}>
+        <textarea>abc</textarea>
+        <button>{props.submitText}</button>
+      </form>
+      /* eslint-enable */
+    }
+
+    var submitText = 'Submit >.<'
+    var $el = <div>
+      <Editor action='//example.com' submitText={submitText}/>
+    </div>
+
+    $el.children('form').attr('action').should.be.equal('//example.com')
+    $el.find('form button').text().should.be.equal(submitText)
+  })
+})
