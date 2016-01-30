@@ -60,6 +60,17 @@ describe('Build with content', function () {
     var $el = <div>{[1, 'two', false]}</div>
     $el.text().should.be.equal('1twofalse')
   })
+
+  it('should work with children prop', function () {
+    var $el = <div children={['a', <span>b</span>]}/>
+    $el.contents().first().text().should.be.equal('a')
+    $el.children('span').text().should.be.equal('b')
+  })
+
+  it('should use actual children but not children prop', function () {
+    var $el = <div children='a'>b</div>
+    $el.text().should.be.equal('b')
+  })
 })
 
 describe('Build with attributes', function () {
