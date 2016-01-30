@@ -84,14 +84,7 @@
           }
         }
       } else if (key === 'style') {
-        var style = {}
-        for (var k in value) {
-          var styleKey = k.replace(/[A-Z]/g, function (val) {
-            return '-' + val.toLowerCase()
-          })
-          style[styleKey] = value[k]
-        }
-        $el.css(style)
+        $el.css(value)
       } else {
         $el.attr(key, value)
       }
