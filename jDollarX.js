@@ -1,5 +1,6 @@
 (function (root, factory) {
   /* eslint-disable */
+  /* istanbul ignore next */
   if (typeof define === 'function' && define.amd) {
     define('J$X', factory)
   } else if (typeof module === 'object' && module.exports) {
