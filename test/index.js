@@ -85,16 +85,32 @@ describe('Build with attributes', function () {
     $el.hasClass('bar').should.be.equal(true)
   })
 
-  xit('should work with style', function () {
-    var inlineStyle = {color: '#fff'}
+  it('should work with style', function () {
+    var inlineStyle = {display: 'inline'}
     var $el = <div style={inlineStyle}></div>
-    $el.css('color').should.be.equal('#fff')
+    $el.css('display').should.be.equal('inline')
   })
 
   it('should work with style of multiple words\' name', function () {
     var inlineStyle = {textAlign: 'center'}
     var $el = <div style={inlineStyle}></div>
     $el.css('text-align').should.be.equal('center')
+  })
+
+  it('should work with style value of number type', function () {
+    var inlineStyle = {
+      width: -0,
+      height: +0,
+      borderWidth: 1 / 0,
+      margin: NaN,
+      fontSize: 14
+    }
+    var $el = <div style={inlineStyle}></div>
+    $el.css('height').should.be.equal('0px')
+    $el.css('width').should.be.equal('0px')
+    $el.css('border-width').should.be.empty
+    $el.css('margin').should.be.empty
+    $el.css('font-size').should.be.equal('14px')
   })
 
   it('should work with attributes & expression', function () {
