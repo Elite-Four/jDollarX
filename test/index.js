@@ -121,6 +121,18 @@ describe('Build with attributes', function () {
   })
 })
 
+describe('Build with events', function () {
+  it('should work with event & expression', function () {
+    var flag = false
+    var foo = function () {
+      flag = true
+    }
+    var $el = <div onClick={foo}></div>
+    $el.click()
+    flag.should.ok
+  })
+})
+
 describe('Build with nested components', function () {
   it('should work', function () {
     function Editor (props) {
