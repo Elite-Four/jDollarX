@@ -86,6 +86,8 @@
         }
       } else if (key === 'style') {
         $el.css(value)
+      } else if (/on[A-Z]/.test(key)) {
+        $el.on(key.split(/on/)[1].toLowerCase(), value)
       } else {
         $el.attr(key, value)
       }
