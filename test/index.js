@@ -14,7 +14,7 @@ before(function () {
 describe('Build with tag name', function () {
   it('should work', function () {
     var $el = <div></div>
-    $el.is('div').should.ok
+    $el.is('div').should.ok()
   })
 
   it('should work with nested elements', function () {
@@ -48,12 +48,12 @@ describe('Build with content', function () {
 
   it('should work with null', function () {
     var $el = <div>{null}</div>
-    $el.text().should.be.empty
+    $el.text().should.be.empty()
   })
 
   it('should work with undefined', function () {
     var $el = <div>{void 0}</div>
-    $el.text().should.be.empty
+    $el.text().should.be.empty()
   })
 
   it('should work with an array of content', function () {
@@ -108,16 +108,16 @@ describe('Build with attributes', function () {
     var $el = <div style={inlineStyle}></div>
     $el.css('height').should.be.equal('0px')
     $el.css('width').should.be.equal('0px')
-    $el.css('border-width').should.be.empty
-    $el.css('margin').should.be.empty
+    $el.css('border-width').should.be.empty()
+    $el.css('margin').should.be.empty()
     $el.css('font-size').should.be.equal('14px')
   })
 
   it('should work with attributes & expression', function () {
-    var $true = <div data-foo={true ? 'true' : 'false'}></div>
-    var $false = <div data-foo={false ? 'true' : 'false'}></div>
-    $true.attr('data-foo').should.be.equal('true')
-    $false.attr('data-foo').should.be.equal('false')
+    var $true = <div data-foo={true ? 'True!' : 'False!'}></div>
+    var $false = <div data-foo={false ? 'True!' : 'False!'}></div>
+    $true.attr('data-foo').should.be.equal('True!')
+    $false.attr('data-foo').should.be.equal('False!')
   })
 })
 
@@ -129,7 +129,7 @@ describe('Build with events', function () {
     }
     var $el = <div onClick={foo}></div>
     $el.click()
-    flag.should.ok
+    flag.should.be.true()
   })
 })
 
