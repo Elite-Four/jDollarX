@@ -86,8 +86,8 @@
         }
       } else if (key === 'style') {
         $el.css(value)
-      } else if (key.match(/^on[A-Z]?/)) {
-        $el.on(key[1].toLowerCase(), value)
+      } else if ((/^on[A-Z]?/).test(key)) {
+        $el.on(key.slice(2, key.length).toLowerCase(), value)
       } else {
         $el.attr(key, value)
       }
