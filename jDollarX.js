@@ -47,6 +47,16 @@
     }
   }
 
+  function matchIndex (str, regExp, index) {
+    var matches = str.match(regExp)
+
+    if (matches != null) {
+      return matches[index]
+    } else {
+      return null
+    }
+  }
+
   var J$X = function (name, props/*, children... */) {
     var children = slice.call(arguments, 2)
     var _props = new ClearObject(props)
@@ -73,6 +83,8 @@
 
   J$X.dom = function (name, props) {
     var $el = $('<' + name + '>')
+    var event
+
     for (var key in props) {
       var value = props[key]
       key = KEY_ALIASES[key] || key
@@ -86,8 +98,8 @@
         }
       } else if (key === 'style') {
         $el.css(value)
-      } else if ((/^on[A-Z]?/).test(key)) {
-        $el.on(key.slice(2, key.length).toLowerCase(), value)
+      } else if ((event = matchIndex(key, /^on([A-Z]\w*)$/, 1))) {
+        $el.on(event.toLowerCase(), value)
       } else {
         $el.attr(key, value)
       }
