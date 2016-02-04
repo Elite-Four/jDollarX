@@ -5,12 +5,10 @@ var jsdom = require('jsdom')
 var jquery = require('jquery')
 var J$X = require('../jDollarX')
 
-before(function () {
-  var window = jsdom.jsdom().defaultView
-  var $ = jquery(window)
+var window = jsdom.jsdom().defaultView
+var $ = jquery(window)
 
-  J$X.use($)
-})
+J$X.use($)
 
 describe('Build with tag name', function () {
   it('should work', function () {
@@ -124,10 +122,26 @@ describe('Build with attributes', function () {
 
 describe('Build with events', function () {
   it('should work with event & expression', function () {
-    var spy = sinon.spy()
-    var $el = <div onClick={spy}></div>
+    var foo = sinon.spy()
+    var $el = <div onClick={foo}></div>
     $el.click()
-    spy.called.should.be.true()
+    foo.calledOnce.should.be.true()
+    foo.calledWith(sinon.match.instanceOf($.Event)).should.be.true()
+  })
+
+  it('should work with incorrect capitalized event', function () {
+    var foo = sinon.spy()
+    var $el = <div onClIcK={foo}></div>
+    $el.click()
+    foo.calledOnce.should.be.true()
+    foo.calledWith(sinon.match.instanceOf($.Event)).should.be.true()
+  })
+
+  it('should not decide not on-EventName event', function () {
+    var foo = sinon.spy()
+    var $el = <div oncLick={foo}></div>
+    $el.click()
+    foo.neverCalledWith(sinon.match.instanceOf($.Event)).should.be.true()
   })
 })
 
