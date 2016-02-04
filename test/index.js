@@ -1,5 +1,6 @@
 /* eslint-env node, mocha */
 /** @jsx J$X */
+var sinon = require('sinon')
 var jsdom = require('jsdom')
 var jquery = require('jquery')
 var J$X = require('../jDollarX')
@@ -123,13 +124,21 @@ describe('Build with attributes', function () {
 
 describe('Build with events', function () {
   it('should work with event & expression', function () {
-    var flag = false
-    var foo = function () {
-      flag = true
+    var spy = sinon.spy()
+    var foo = function (spy) {
+      var returnValue
+      var called = false
+      return function () {
+        if (!called) {
+          called = true
+          returnValue = spy.apply(this, arguments)
+        }
+        return returnValue
+      }
     }
-    var $el = <div onClick={foo}></div>
+    var $el = <div onClick={foo(spy)}></div>
     $el.click()
-    flag.should.be.true()
+    spy.called.should.be.true()
   })
 })
 
