@@ -19,7 +19,7 @@ Usage
 ```jsx
 /** @jsx J$X */
 var J$X = require('jdollarx')
-$('body').append(<div>Hello, world</div>)
+$('body').append(<div>Hello, jDollarX</div>)
 ```
 
 License
