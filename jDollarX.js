@@ -30,8 +30,10 @@
   }
 
   function ClearObject (obj) {
-    for (var key in obj) if (ownProp.call(obj, key)) {
-      this[key] = obj[key]
+    for (var key in obj) {
+      if (ownProp.call(obj, key)) {
+        this[key] = obj[key]
+      }
     }
   }
   ClearObject.prototype = null
