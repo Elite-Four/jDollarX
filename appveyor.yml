@@ -6,9 +6,9 @@ init:
 environment:
   matrix:
     # node.js
-    - nodejs_version: "6.0"
-    - nodejs_version: "5.0"
-    - nodejs_version: "4.0"
+    - nodejs_version: "6"
+    - nodejs_version: "5"
+    - nodejs_version: "4"
     - nodejs_version: "0.12"
     - nodejs_version: "0.10"
 
@@ -16,29 +16,30 @@ platform:
   - x86
   - x64
 
-matrix:
-  fast_finish: true
-
-cache:
-  # local npm modules
-  - node_modules
-
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
   # install modules
+  - npm install -g npm
   - npm install
 
 
 # Post-install test scripts.
-test_scripts:
+test_script:
   # Output useful info for debugging
-  - node --version
-  - npm --version
+  - node --version && npm --version
   # run tests
-  - echo Run npm test
+  - ps: "npm test # PowerShell" # Pass comment to PS for easier debugging
+  - cmd: npm test
   - npm test
 
 # Don't actually build.
 build: off
+
+matrix:
+  fast_finish: true
+
+cache:
+  # local npm modules
+  - node_modules -> package.json
