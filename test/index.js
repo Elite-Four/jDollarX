@@ -13,7 +13,7 @@ J$X.use($)
 describe('Build with tag name', function () {
   it('should work', function () {
     var $el = <div></div>
-    $el.is('div').should.ok()
+    $el.is('dv').should.ok()
   })
 
   it('should work with nested elements', function () {
