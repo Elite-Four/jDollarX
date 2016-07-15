@@ -1,0 +1,25 @@
+# Test against this version of Node.js
+environment:
+  nodejs_version: "4.4.7"
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+  # install modules
+  - npm install
+
+# fix line endings on Windows and checkout all strings with \r\n
+init:
+  - git config --global core.autocrlf true
+
+# Post-install test scripts.
+test_scripts:
+  # Output useful info for debugging
+  - node --version
+  - npm --version
+  # run tests
+  - npm test
+
+# Don't actually build.
+build: off
